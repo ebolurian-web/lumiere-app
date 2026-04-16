@@ -128,8 +128,8 @@ export default function StaffCoursesPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {courses.map((course, i) => (
           <BlurFade key={course.id} delay={0.1 + i * 0.06} inView>
-            <Link href={`/staff/courses/${course.id}`}>
-            <Card className="card-hover-glow cursor-pointer h-full overflow-hidden">
+            <Link href={`/staff/courses/${course.id}`} className="block">
+              <Card className="card-hover-glow cursor-pointer h-full overflow-hidden">
               {/* Gradient color header */}
               <div
                 className={`h-2 rounded-t-xl bg-gradient-to-r ${
@@ -183,7 +183,7 @@ export default function StaffCoursesPage() {
                   </span>
                 </div>
               </CardContent>
-            </Card>
+              </Card>
             </Link>
           </BlurFade>
         ))}
