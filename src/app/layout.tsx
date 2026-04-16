@@ -46,7 +46,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${sourceSans.variable} ${crimsonPro.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${sourceSans.variable} ${crimsonPro.variable} ${ibmPlexMono.variable} antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider

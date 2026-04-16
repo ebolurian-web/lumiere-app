@@ -35,7 +35,7 @@ export function PortalShell({ children, requiredRole }: PortalShellProps) {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset className="bg-background">
-        <main className="flex-1 p-6 lg:p-8">{children}</main>
+        <main className="flex-1 p-6 lg:p-8 overflow-y-auto">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );
