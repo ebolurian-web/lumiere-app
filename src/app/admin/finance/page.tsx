@@ -1,18 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { NumberTicker } from "@/components/ui/number-ticker";
 
 const MONTHLY_DATA = [
-  { month: "Sep", revenue: 380000 },
-  { month: "Oct", revenue: 345000 },
-  { month: "Nov", revenue: 310000 },
-  { month: "Dec", revenue: 290000 },
-  { month: "Jan", revenue: 420000 },
-  { month: "Feb", revenue: 395000 },
-  { month: "Mar", revenue: 410000 },
-  { month: "Apr", revenue: 185000 },
+  { month: "Sep", revenue: 180000 },
+  { month: "Oct", revenue: 195000 },
+  { month: "Nov", revenue: 210000 },
+  { month: "Dec", revenue: 165000 },
+  { month: "Jan", revenue: 220000 },
+  { month: "Feb", revenue: 205000 },
+  { month: "Mar", revenue: 215000 },
+  { month: "Apr", revenue: 190000 },
+  { month: "May", revenue: 0 },
+  { month: "Jun", revenue: 0 },
+  { month: "Jul", revenue: 0 },
+  { month: "Aug", revenue: 0 },
 ];
 
 const maxRevenue = Math.max(...MONTHLY_DATA.map((d) => d.revenue));
@@ -23,15 +28,31 @@ function formatCurrency(value: number) {
   return `$${value}`;
 }
 
+const TUITION_BREAKDOWN = [
+  { program: "Computer Science", amount: "$620,000", pct: "34%" },
+  { program: "Business Administration", amount: "$450,000", pct: "25%" },
+  { program: "Data Science", amount: "$380,000", pct: "21%" },
+  { program: "Liberal Arts", amount: "$350,000", pct: "20%" },
+];
+
+const COLLECTION_METRICS = [
+  { label: "Current semester rate", value: "94.2%" },
+  { label: "30-day delinquent", value: "3.8%" },
+  { label: "60-day delinquent", value: "1.4%" },
+  { label: "Payment plans active", value: "67" },
+];
+
 export default function FinancePage() {
+  const [hoveredBar, setHoveredBar] = useState<number | null>(null);
+
   return (
     <div className="space-y-8">
       <BlurFade delay={0}>
-        <h1 className="font-display text-3xl text-navy dark:text-foreground tracking-tight">
+        <h1 className="font-display text-3xl font-light text-navy dark:text-foreground tracking-tight">
           Financial Overview
         </h1>
         <p className="text-foreground/40 text-sm mt-1">
-          Academic year 2025-2026
+          Fiscal Year 2025-2026
         </p>
       </BlurFade>
 
@@ -91,7 +112,7 @@ export default function FinancePage() {
           <Card className="card-hover-glow">
             <CardContent className="p-6">
               <p className="text-[11px] font-medium uppercase tracking-widest text-foreground/35 mb-3">
-                Outstanding
+                Outstanding Balance
               </p>
               <div className="flex items-baseline gap-1">
                 <span className="text-[1.7rem] font-mono font-semibold text-foreground leading-none">
@@ -114,29 +135,57 @@ export default function FinancePage() {
         </div>
       </BlurFade>
 
-      {/* Monthly revenue chart */}
+      {/* Monthly Revenue Bar Chart */}
       <BlurFade delay={0.2}>
         <Card className="card-hover-glow">
           <CardHeader className="pb-3">
             <CardTitle className="font-serif text-lg">Monthly Revenue</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
-              {MONTHLY_DATA.map((d) => {
-                const pct = Math.round((d.revenue / maxRevenue) * 100);
+            <div className="flex items-end gap-2 h-52">
+              {MONTHLY_DATA.map((d, i) => {
+                const pct =
+                  d.revenue > 0
+                    ? Math.max((d.revenue / maxRevenue) * 100, 4)
+                    : 0;
+                const isHovered = hoveredBar === i;
+                const isFuture = d.revenue === 0;
+
                 return (
-                  <div key={d.month} className="flex items-center gap-4">
-                    <span className="font-mono text-xs text-foreground/40 w-8">
+                  <div
+                    key={d.month}
+                    className="flex-1 flex flex-col items-center justify-end h-full relative"
+                    onMouseEnter={() => !isFuture && setHoveredBar(i)}
+                    onMouseLeave={() => setHoveredBar(null)}
+                  >
+                    {/* Value label on hover */}
+                    {isHovered && d.revenue > 0 && (
+                      <div className="absolute -top-1 font-mono text-[10px] text-foreground/70 font-medium whitespace-nowrap">
+                        {formatCurrency(d.revenue)}
+                      </div>
+                    )}
+
+                    {/* Bar */}
+                    <div
+                      className={`w-full rounded-t transition-all duration-500 ${
+                        isFuture
+                          ? "bg-muted/20 border border-dashed border-border/30"
+                          : isHovered
+                            ? "bg-primary"
+                            : "bg-primary/70"
+                      }`}
+                      style={{
+                        height: isFuture ? "8%" : `${pct}%`,
+                      }}
+                    />
+
+                    {/* Month label */}
+                    <span
+                      className={`font-mono text-[10px] mt-2 ${
+                        isFuture ? "text-foreground/20" : "text-foreground/40"
+                      }`}
+                    >
                       {d.month}
-                    </span>
-                    <div className="flex-1 h-6 rounded bg-muted/30 overflow-hidden">
-                      <div
-                        className="h-full rounded bg-primary/70 transition-all duration-700"
-                        style={{ width: `${pct}%` }}
-                      />
-                    </div>
-                    <span className="font-mono text-xs text-foreground/50 w-16 text-right">
-                      {formatCurrency(d.revenue)}
                     </span>
                   </div>
                 );
@@ -146,32 +195,29 @@ export default function FinancePage() {
         </Card>
       </BlurFade>
 
-      {/* Bottom stats */}
+      {/* Revenue Breakdown */}
       <BlurFade delay={0.3}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <Card className="card-hover-glow">
             <CardHeader className="pb-3">
               <CardTitle className="font-serif text-lg">
-                Revenue Breakdown
+                Tuition by Program
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              {[
-                { label: "Tuition & Fees", value: "$1,800,000", pct: "86%" },
-                { label: "Housing & Dining", value: "$180,000", pct: "8%" },
-                { label: "Lab & Material Fees", value: "$72,000", pct: "3%" },
-                { label: "Other Revenue", value: "$48,000", pct: "3%" },
-              ].map(({ label, value, pct }) => (
+              {TUITION_BREAKDOWN.map(({ program, amount, pct }) => (
                 <div
-                  key={label}
+                  key={program}
                   className="flex items-center justify-between py-2 border-b border-border/20 last:border-0"
                 >
-                  <span className="text-sm text-foreground/50">{label}</span>
+                  <span className="text-sm text-foreground/50">{program}</span>
                   <div className="flex items-center gap-3">
                     <span className="font-mono text-xs text-foreground/30">
                       {pct}
                     </span>
-                    <span className="font-mono text-sm font-medium">{value}</span>
+                    <span className="font-mono text-sm font-medium">
+                      {amount}
+                    </span>
                   </div>
                 </div>
               ))}
@@ -180,15 +226,12 @@ export default function FinancePage() {
 
           <Card className="card-hover-glow">
             <CardHeader className="pb-3">
-              <CardTitle className="font-serif text-lg">Key Metrics</CardTitle>
+              <CardTitle className="font-serif text-lg">
+                Collection Rate Metrics
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              {[
-                { label: "Avg. tuition per student", value: "$18,500" },
-                { label: "Financial aid distributed", value: "$420K" },
-                { label: "Scholarship fund balance", value: "$1.2M" },
-                { label: "Operating margin", value: "14.2%" },
-              ].map(({ label, value }) => (
+              {COLLECTION_METRICS.map(({ label, value }) => (
                 <div
                   key={label}
                   className="flex items-center justify-between py-2 border-b border-border/20 last:border-0"

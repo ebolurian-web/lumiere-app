@@ -19,6 +19,7 @@ const REPORTS = [
     description:
       "Comprehensive overview of enrollment trends, demographics, and program distribution across all active cohorts.",
     frequency: "Updated monthly",
+    lastGenerated: "Apr 12, 2026",
     icon: Users,
     color: "text-info",
     bg: "bg-info/10",
@@ -28,6 +29,7 @@ const REPORTS = [
     description:
       "GPA distributions, course pass rates, academic probation tracking, and dean's list statistics.",
     frequency: "Updated monthly",
+    lastGenerated: "Apr 10, 2026",
     icon: GraduationCap,
     color: "text-success",
     bg: "bg-success/10",
@@ -37,6 +39,7 @@ const REPORTS = [
     description:
       "Revenue analysis, tuition collection rates, outstanding balances, and financial aid utilization.",
     frequency: "Updated monthly",
+    lastGenerated: "Apr 8, 2026",
     icon: DollarSign,
     color: "text-warning",
     bg: "bg-warning/10",
@@ -46,6 +49,7 @@ const REPORTS = [
     description:
       "Student retention and attrition rates by program, year, and demographic cohort with trend analysis.",
     frequency: "Updated weekly",
+    lastGenerated: "Apr 14, 2026",
     icon: TrendingUp,
     color: "text-primary",
     bg: "bg-primary/10",
@@ -54,7 +58,8 @@ const REPORTS = [
     title: "Admissions Pipeline",
     description:
       "Application funnel metrics, conversion rates, yield analysis, and recruitment campaign performance.",
-    frequency: "Updated weekly",
+    frequency: "Updated daily",
+    lastGenerated: "Apr 16, 2026",
     icon: FileBarChart,
     color: "text-purple-600",
     bg: "bg-purple-600/10",
@@ -64,6 +69,7 @@ const REPORTS = [
     description:
       "Teaching evaluations, course outcomes, research output, and faculty satisfaction metrics.",
     frequency: "Updated monthly",
+    lastGenerated: "Apr 5, 2026",
     icon: Award,
     color: "text-pink-600",
     bg: "bg-pink-600/10",
@@ -78,7 +84,7 @@ export default function ReportsPage() {
           Reports
         </h1>
         <p className="text-foreground/40 text-sm mt-1">
-          Institutional analytics and reporting
+          {REPORTS.length} reports available
         </p>
       </BlurFade>
 
@@ -87,7 +93,7 @@ export default function ReportsPage() {
           const Icon = report.icon;
           return (
             <BlurFade key={report.title} delay={0.1 + i * 0.06} inView>
-              <Card className="card-hover-glow h-full cursor-pointer">
+              <Card className="card-hover-glow h-full">
                 <CardContent className="p-6 flex flex-col h-full">
                   <div
                     className={`w-10 h-10 rounded-lg ${report.bg} flex items-center justify-center mb-4`}
@@ -101,18 +107,24 @@ export default function ReportsPage() {
                     {report.description}
                   </p>
                   <div className="gradient-divider mb-4" />
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-[10px] text-foreground/30 uppercase tracking-wider">
-                      {report.frequency}
-                    </span>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      className="h-7 text-xs text-primary hover:text-primary hover:bg-primary/10"
+                  <div className="flex items-center justify-between mb-3">
+                    <Badge
+                      variant="secondary"
+                      className="text-[10px] font-medium bg-muted/50"
                     >
-                      View Report
-                    </Button>
+                      {report.frequency}
+                    </Badge>
+                    <span className="font-mono text-xs text-foreground/30">
+                      {report.lastGenerated}
+                    </span>
                   </div>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="w-full h-8 text-xs"
+                  >
+                    Generate Report
+                  </Button>
                 </CardContent>
               </Card>
             </BlurFade>

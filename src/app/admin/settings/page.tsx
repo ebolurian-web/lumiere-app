@@ -7,16 +7,67 @@ import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { BlurFade } from "@/components/ui/blur-fade";
-import { useRole } from "@/lib/role-context";
+
+const SYSTEM_TOGGLES_GROUP_1 = [
+  {
+    label: "Maintenance Mode",
+    desc: "Temporarily disable access for students and staff",
+    defaultChecked: false,
+  },
+  {
+    label: "Email Notifications",
+    desc: "Send system emails for approvals and alerts",
+    defaultChecked: true,
+  },
+  {
+    label: "Auto-Enrollment",
+    desc: "Automatically enroll students upon admission approval",
+    defaultChecked: true,
+  },
+];
+
+const SYSTEM_TOGGLES_GROUP_2 = [
+  {
+    label: "Grade Auto-Publish",
+    desc: "Publish grades to students when faculty submit them",
+    defaultChecked: false,
+  },
+  {
+    label: "Two-Factor Auth",
+    desc: "Require 2FA for all administrative accounts",
+    defaultChecked: true,
+  },
+  {
+    label: "Audit Logging",
+    desc: "Log all administrative actions for compliance",
+    defaultChecked: true,
+  },
+];
+
+const NOTIFICATION_TOGGLES = [
+  {
+    label: "Approval Alerts",
+    desc: "Get notified when new approvals are submitted",
+    defaultChecked: true,
+  },
+  {
+    label: "Enrollment Alerts",
+    desc: "Receive notifications for new enrollment activity",
+    defaultChecked: true,
+  },
+  {
+    label: "Weekly Digest",
+    desc: "Summary of enrollment, finance, and performance metrics",
+    defaultChecked: true,
+  },
+];
 
 export default function AdminSettingsPage() {
-  const { user } = useRole();
-
   return (
     <div className="space-y-8 max-w-2xl">
       <BlurFade delay={0}>
         <h1 className="font-display text-3xl text-navy dark:text-foreground tracking-tight">
-          Settings
+          System Settings
         </h1>
         <p className="text-foreground/40 text-sm mt-1">
           Profile and system configuration
@@ -31,16 +82,14 @@ export default function AdminSettingsPage() {
             <div className="flex items-center gap-5 mb-6">
               <Avatar className="h-16 w-16 border border-border">
                 <AvatarFallback className="text-lg bg-primary/10 text-primary font-semibold">
-                  {user?.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")
-                    .slice(0, 2)}
+                  VH
                 </AvatarFallback>
               </Avatar>
               <div>
-                <p className="font-medium">{user?.name}</p>
-                <p className="text-sm text-foreground/40">{user?.email}</p>
+                <p className="font-medium">Victoria Harrington</p>
+                <p className="text-sm text-foreground/40">
+                  v.harrington@lumiere.edu
+                </p>
                 <p className="text-xs text-primary font-medium mt-0.5">
                   Administrator
                 </p>
@@ -50,7 +99,7 @@ export default function AdminSettingsPage() {
               <div className="space-y-2">
                 <Label className="text-xs text-foreground/50">First Name</Label>
                 <Input
-                  defaultValue={user?.name.split(" ")[0]}
+                  defaultValue="Victoria"
                   readOnly
                   className="bg-muted/30"
                 />
@@ -58,7 +107,7 @@ export default function AdminSettingsPage() {
               <div className="space-y-2">
                 <Label className="text-xs text-foreground/50">Last Name</Label>
                 <Input
-                  defaultValue={user?.name.split(" ").slice(1).join(" ")}
+                  defaultValue="Harrington"
                   readOnly
                   className="bg-muted/30"
                 />
@@ -66,7 +115,7 @@ export default function AdminSettingsPage() {
               <div className="space-y-2 col-span-2">
                 <Label className="text-xs text-foreground/50">Email</Label>
                 <Input
-                  defaultValue={user?.email}
+                  defaultValue="v.harrington@lumiere.edu"
                   readOnly
                   className="bg-muted/30"
                 />
@@ -75,6 +124,8 @@ export default function AdminSettingsPage() {
           </CardContent>
         </Card>
       </BlurFade>
+
+      <div className="gradient-divider" />
 
       {/* System Configuration */}
       <BlurFade delay={0.2}>
@@ -84,50 +135,35 @@ export default function AdminSettingsPage() {
               System Configuration
             </h3>
             <div className="space-y-5">
-              {[
-                {
-                  label: "Maintenance mode",
-                  desc: "Temporarily disable access for students and staff",
-                  default: false,
-                },
-                {
-                  label: "Email notifications",
-                  desc: "Send system emails for approvals and alerts",
-                  default: true,
-                },
-                {
-                  label: "Auto-enrollment",
-                  desc: "Automatically enroll students upon admission approval",
-                  default: true,
-                },
-                {
-                  label: "Grade auto-publish",
-                  desc: "Publish grades to students when faculty submit them",
-                  default: false,
-                },
-                {
-                  label: "Two-factor authentication",
-                  desc: "Require 2FA for all administrative accounts",
-                  default: true,
-                },
-                {
-                  label: "Audit logging",
-                  desc: "Log all administrative actions for compliance",
-                  default: true,
-                },
-              ].map(({ label, desc, default: def }) => (
+              {SYSTEM_TOGGLES_GROUP_1.map(({ label, desc, defaultChecked }) => (
                 <div key={label} className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium">{label}</p>
                     <p className="text-xs text-foreground/35">{desc}</p>
                   </div>
-                  <Switch defaultChecked={def} />
+                  <Switch defaultChecked={defaultChecked} />
+                </div>
+              ))}
+            </div>
+
+            <div className="gradient-divider my-5" />
+
+            <div className="space-y-5">
+              {SYSTEM_TOGGLES_GROUP_2.map(({ label, desc, defaultChecked }) => (
+                <div key={label} className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium">{label}</p>
+                    <p className="text-xs text-foreground/35">{desc}</p>
+                  </div>
+                  <Switch defaultChecked={defaultChecked} />
                 </div>
               ))}
             </div>
           </CardContent>
         </Card>
       </BlurFade>
+
+      <div className="gradient-divider" />
 
       {/* Notifications */}
       <BlurFade delay={0.3}>
@@ -137,34 +173,13 @@ export default function AdminSettingsPage() {
               Notifications
             </h3>
             <div className="space-y-5">
-              {[
-                {
-                  label: "Approval requests",
-                  desc: "Get notified when new approvals are submitted",
-                  default: true,
-                },
-                {
-                  label: "System alerts",
-                  desc: "Receive critical system and security alerts",
-                  default: true,
-                },
-                {
-                  label: "Weekly digest",
-                  desc: "Summary of enrollment, finance, and performance metrics",
-                  default: true,
-                },
-                {
-                  label: "Staff updates",
-                  desc: "Notifications about staff changes and requests",
-                  default: false,
-                },
-              ].map(({ label, desc, default: def }) => (
+              {NOTIFICATION_TOGGLES.map(({ label, desc, defaultChecked }) => (
                 <div key={label} className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium">{label}</p>
                     <p className="text-xs text-foreground/35">{desc}</p>
                   </div>
-                  <Switch defaultChecked={def} />
+                  <Switch defaultChecked={defaultChecked} />
                 </div>
               ))}
             </div>
@@ -172,11 +187,11 @@ export default function AdminSettingsPage() {
         </Card>
       </BlurFade>
 
-      {/* Actions */}
+      {/* Save */}
       <BlurFade delay={0.4}>
         <div className="flex justify-end">
           <Button className="bg-primary hover:bg-primary/90 text-white">
-            Save changes
+            Save Changes
           </Button>
         </div>
       </BlurFade>
