@@ -15,13 +15,13 @@ export default function StaffSettingsPage() {
   return (
     <div className="space-y-8 max-w-2xl">
       <BlurFade delay={0}>
-        <h1 className="font-display text-3xl text-navy dark:text-foreground tracking-tight">Settings</h1>
+        <h1 className="font-display text-3xl font-light text-navy dark:text-foreground tracking-tight">Settings</h1>
         <p className="text-foreground/40 text-sm mt-1">Profile and teaching preferences</p>
       </BlurFade>
 
       {/* Profile */}
       <BlurFade delay={0.1}>
-        <Card className="card-hover-glow">
+        <Card className="card-hover-glow card-hover-glow">
           <CardContent className="p-6">
             <h3 className="font-serif text-lg font-semibold mb-6">Profile</h3>
             <div className="flex items-center gap-5 mb-6">
@@ -60,7 +60,7 @@ export default function StaffSettingsPage() {
 
       {/* Office Hours */}
       <BlurFade delay={0.15}>
-        <Card className="card-hover-glow">
+        <Card className="card-hover-glow card-hover-glow">
           <CardContent className="p-6">
             <h3 className="font-serif text-lg font-semibold mb-6">Office Hours</h3>
             <div className="grid grid-cols-2 gap-4">
@@ -90,7 +90,7 @@ export default function StaffSettingsPage() {
 
       {/* Notifications */}
       <BlurFade delay={0.2}>
-        <Card className="card-hover-glow">
+        <Card className="card-hover-glow card-hover-glow">
           <CardContent className="p-6">
             <h3 className="font-serif text-lg font-semibold mb-6">Notifications</h3>
             <div className="space-y-5">
@@ -116,7 +116,7 @@ export default function StaffSettingsPage() {
 
       {/* Grading Preferences */}
       <BlurFade delay={0.25}>
-        <Card className="card-hover-glow">
+        <Card className="card-hover-glow card-hover-glow">
           <CardContent className="p-6">
             <h3 className="font-serif text-lg font-semibold mb-6">Grading Preferences</h3>
             <div className="space-y-5">
