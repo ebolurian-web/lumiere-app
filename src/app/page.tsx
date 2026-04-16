@@ -352,7 +352,7 @@ export default function HomePage() {
       >
         <div className="max-w-[1400px] mx-auto">
           <ScrollReveal>
-            <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#A41034] mb-4">
+            <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-primary mb-4">
               System Infrastructure
             </p>
             <h2 className="font-display text-4xl md:text-5xl font-light text-white leading-tight mb-16 max-w-lg">
@@ -570,8 +570,7 @@ export default function HomePage() {
         <div className="max-w-[1400px] mx-auto">
           <ScrollReveal direction="scale">
             <div
-              className="relative rounded-3xl overflow-hidden px-8 py-20 md:py-28 text-center"
-              style={{ backgroundColor: "#A41034" }}
+              className="relative rounded-3xl overflow-hidden px-8 py-20 md:py-28 text-center bg-primary"
             >
               <div className="relative z-10">
                 <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-white mb-6 font-light leading-tight max-w-2xl mx-auto">
@@ -582,7 +581,7 @@ export default function HomePage() {
                   institutional data.
                 </p>
                 <Link href="/auth/signin">
-                  <button className="bg-white text-[#A41034] hover:bg-white/90 transition-colors rounded-full h-14 px-10 text-[15px] font-medium inline-flex items-center gap-2 cursor-pointer">
+                  <button className="bg-white text-primary hover:bg-white/90 transition-colors rounded-full h-14 px-10 text-[15px] font-medium inline-flex items-center gap-2 cursor-pointer">
                     Enter the portal
                     <ArrowRight className="w-4 h-4" />
                   </button>

@@ -259,7 +259,7 @@ export default function StudentDashboard() {
     <div className="grid grid-cols-12 gap-5">
       {/* ── Welcome Banner ── col-span-12 */}
       <BlurFade delay={0} className="col-span-12">
-        <div className="relative overflow-hidden rounded-2xl bg-[#A41034] p-8 md:p-10">
+        <div className="relative overflow-hidden rounded-2xl bg-primary p-8 md:p-10">
           {/* Decorative Shield */}
           <Shield
             className="absolute -right-8 -bottom-8 w-56 h-56 text-white/[0.06] rotate-12 pointer-events-none"
@@ -277,7 +277,7 @@ export default function StudentDashboard() {
 
           <div className="flex items-center gap-3 mt-6">
             <Link href="/student/assignments">
-              <Button className="bg-white text-[#A41034] hover:bg-white/90 font-medium text-sm px-5 h-9 rounded-lg">
+              <Button className="bg-white text-primary hover:bg-white/90 font-medium text-sm px-5 h-9 rounded-lg">
                 View Tasks
               </Button>
             </Link>

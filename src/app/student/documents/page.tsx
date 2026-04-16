@@ -92,6 +92,8 @@ export default function DocumentsPage() {
             variant="outline"
             size="sm"
             className="gap-2 border-dashed border-2"
+            title="Coming soon"
+            disabled
           >
             <Upload className="w-3.5 h-3.5" />
             Upload

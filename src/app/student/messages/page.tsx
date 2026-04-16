@@ -102,6 +102,7 @@ export default function MessagesPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [composeText, setComposeText] = useState("");
+  const [extraBubbles, setExtraBubbles] = useState<ChatBubble[]>([]);
 
   useEffect(() => {
     async function fetchMessages() {
@@ -133,7 +134,7 @@ export default function MessagesPage() {
     );
   });
 
-  const chatThread = selected ? buildChatThread(selected, selectedIndex) : [];
+  const chatThread = selected ? [...buildChatThread(selected, selectedIndex), ...extraBubbles] : [];
   const unreadCount = messages.filter((m) => !m.read).length;
 
   if (loading) {
@@ -202,6 +203,7 @@ export default function MessagesPage() {
                           setSelected(msg);
                           setSelectedIndex(idx);
                           setComposeText("");
+                          setExtraBubbles([]);
                         }}
                         className={`
                           w-full flex items-start gap-3 p-4 text-left transition-colors cursor-pointer
@@ -323,6 +325,7 @@ export default function MessagesPage() {
                       onChange={(e) => setComposeText(e.target.value)}
                       onKeyDown={(e) => {
                         if (e.key === "Enter" && composeText.trim()) {
+                          setExtraBubbles((prev) => [...prev, { id: `sent-${Date.now()}`, text: composeText.trim(), sent: true, timestamp: new Date() }]);
                           setComposeText("");
                         }
                       }}
@@ -330,7 +333,10 @@ export default function MessagesPage() {
                     />
                     <button
                       onClick={() => {
-                        if (composeText.trim()) setComposeText("");
+                        if (composeText.trim()) {
+                          setExtraBubbles((prev) => [...prev, { id: `sent-${Date.now()}`, text: composeText.trim(), sent: true, timestamp: new Date() }]);
+                          setComposeText("");
+                        }
                       }}
                       className="h-12 w-12 rounded-lg bg-primary text-white flex items-center justify-center hover:bg-primary/90 transition-colors flex-shrink-0 cursor-pointer"
                     >

@@ -192,7 +192,7 @@ export default function StudentsPage() {
                   </div>
                   <div className="text-right">
                     <p
-                      className={`font-mono text-2xl font-bold leading-none ${gpaColor(s.gpa)}`}
+                      className={`font-mono text-2xl font-bold leading-none ${gpaColor(s.gpa ?? 0)}`}
                     >
                       {s.gpa?.toFixed(2) || "--"}
                     </p>

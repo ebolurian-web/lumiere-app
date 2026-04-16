@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +12,7 @@ import { useRole } from "@/lib/role-context";
 
 export default function StaffSettingsPage() {
   const { user } = useRole();
+  const [saved, setSaved] = useState(false);
 
   return (
     <div className="space-y-8 max-w-2xl">
@@ -27,7 +29,7 @@ export default function StaffSettingsPage() {
             <div className="flex items-center gap-5 mb-6">
               <Avatar className="h-16 w-16 border border-border">
                 <AvatarFallback className="text-lg bg-primary/10 text-primary font-semibold">
-                  {user?.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                  {(user?.name ?? "").split(" ").map((n) => n[0]).join("").slice(0, 2)}
                 </AvatarFallback>
               </Avatar>
               <div>
@@ -141,7 +143,7 @@ export default function StaffSettingsPage() {
       {/* Actions */}
       <BlurFade delay={0.3}>
         <div className="flex justify-end">
-          <Button className="bg-primary hover:bg-primary/90 text-white">Save changes</Button>
+          <Button className="bg-primary hover:bg-primary/90 text-white" onClick={() => { setSaved(true); setTimeout(() => setSaved(false), 2000); }}>{saved ? "Saved!" : "Save changes"}</Button>
         </div>
       </BlurFade>
     </div>

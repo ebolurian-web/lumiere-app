@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -63,6 +64,8 @@ const NOTIFICATION_TOGGLES = [
 ];
 
 export default function AdminSettingsPage() {
+  const [saved, setSaved] = useState(false);
+
   return (
     <div className="space-y-8 max-w-2xl">
       <BlurFade delay={0}>
@@ -190,8 +193,8 @@ export default function AdminSettingsPage() {
       {/* Save */}
       <BlurFade delay={0.4}>
         <div className="flex justify-end">
-          <Button className="bg-primary hover:bg-primary/90 text-white">
-            Save Changes
+          <Button className="bg-primary hover:bg-primary/90 text-white" onClick={() => { setSaved(true); setTimeout(() => setSaved(false), 2000); }}>
+            {saved ? "Saved!" : "Save Changes"}
           </Button>
         </div>
       </BlurFade>
