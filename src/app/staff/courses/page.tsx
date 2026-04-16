@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { supabase } from "@/lib/supabase";
+import Link from "next/link";
 
 const KIM_ID = "c1000000-0000-0000-0000-000000000001";
 
@@ -127,6 +128,7 @@ export default function StaffCoursesPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {courses.map((course, i) => (
           <BlurFade key={course.id} delay={0.1 + i * 0.06} inView>
+            <Link href={`/staff/courses/${course.id}`}>
             <Card className="card-hover-glow cursor-pointer h-full overflow-hidden">
               {/* Gradient color header */}
               <div
@@ -182,6 +184,7 @@ export default function StaffCoursesPage() {
                 </div>
               </CardContent>
             </Card>
+            </Link>
           </BlurFade>
         ))}
       </div>

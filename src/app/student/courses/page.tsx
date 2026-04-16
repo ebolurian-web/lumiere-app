@@ -7,6 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { supabase } from "@/lib/supabase";
+import Link from "next/link";
 
 const MAYA_ID = "b1000000-0000-0000-0000-000000000001";
 
@@ -85,6 +86,7 @@ export default function CoursesPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {courses.map((course, i) => (
           <BlurFade key={course.id} delay={0.08 + i * 0.06} inView>
+            <Link href={`/student/courses/${course.id}`}>
             <Card className="card-hover-glow cursor-pointer h-full overflow-hidden">
               {/* Gradient header bar */}
               <div
@@ -138,6 +140,7 @@ export default function CoursesPage() {
                 </div>
               </CardContent>
             </Card>
+            </Link>
           </BlurFade>
         ))}
       </div>
