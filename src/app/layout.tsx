@@ -32,9 +32,9 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lumiere University | Higher-Ed Pathways",
+  title: "Lumiere | Higher-Ed Pathways",
   description:
-    "Lumiere University — degree programs in Data Science, Learning Design, and Research. Student, faculty, and administrative portals.",
+    "Lumiere — a private academic operating system. Student, staff, and admin workspaces for degree progression, advising, course management, and institutional reporting.",
 };
 
 export default function RootLayout({

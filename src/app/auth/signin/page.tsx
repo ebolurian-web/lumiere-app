@@ -79,7 +79,7 @@ export default function SignInPage() {
               Sign in to Lumiere
             </h1>
             <p className="text-foreground/35 text-sm mt-1.5">
-              Access your student, faculty, or admin portal
+              Access your workspace
             </p>
           </div>
         </BlurFade>
