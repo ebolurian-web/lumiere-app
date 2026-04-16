@@ -1,0 +1,353 @@
+# Theme
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-background-alt: var(--background-alt);
+
+  --font-sans: var(--font-source-sans);
+  --font-serif: var(--font-crimson-pro);
+  --font-display: var(--font-crimson-pro);
+  --font-mono: var(--font-ibm-plex-mono);
+  --font-heading: var(--font-crimson-pro);
+
+  --color-navy: var(--navy);
+  --color-navy-light: var(--navy-light);
+  --color-navy-soft: var(--navy-soft);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-pale: var(--gold-pale);
+  --color-gold-bg: var(--gold-bg);
+  --color-gold-border: var(--gold-border);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+  --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
+  --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
+  @keyframes shimmer-slide {
+  to {
+    transform: translate(calc(100cqw - 100%), 0);
+    }
+  }
+  @keyframes spin-around {
+  0% {
+    transform: translateZ(0) rotate(0);
+    }
+  15%, 35% {
+    transform: translateZ(0) rotate(90deg);
+    }
+  65%, 85% {
+    transform: translateZ(0) rotate(270deg);
+    }
+  100% {
+    transform: translateZ(0) rotate(360deg);
+    }
+  }
+  --animate-shiny-text: shiny-text 8s infinite
+;
+  @keyframes shiny-text {
+  0%, 90%, 100% {
+    background-position: calc(-100% - var(--shiny-width)) 0;}
+  30%, 60% {
+    background-position: calc(100% + var(--shiny-width)) 0;}}
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  @keyframes marquee {
+  from {
+    transform: translateX(0);}
+  to {
+    transform: translateX(calc(-100% - var(--gap)));}}
+  @keyframes marquee-vertical {
+  from {
+    transform: translateY(0);}
+  to {
+    transform: translateY(calc(-100% - var(--gap)));}}
+  --animate-orbit: orbit calc(var(--duration)*1s) linear infinite;
+  @keyframes orbit {
+  0% {
+    transform: rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));}
+  100% {
+    transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));}}}
+
+:root {
+  --background: #FAFAF5;
+  --background-alt: #F3F1ED;
+  --foreground: #1A1A1A;
+  --card: #FFFFFF;
+  --card-foreground: #1A1A1A;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1A1A;
+  --primary: #A41034;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F3F1ED;
+  --secondary-foreground: #1A1A1A;
+  --muted: #F3F1ED;
+  --muted-foreground: #8C8C8C;
+  --accent: #FBE8EC;
+  --accent-foreground: #1A1A1A;
+  --destructive: #C0392B;
+  --border: rgba(0,0,0,0.07);
+  --input: rgba(0,0,0,0.07);
+  --ring: #A41034;
+
+  --navy: #1A1A1A;
+  --navy-light: #2C2C2C;
+  --navy-soft: #4A4A4A;
+  --gold: #A41034;
+  --gold-light: #C41842;
+  --gold-pale: #FBE8EC;
+  --gold-bg: rgba(164,16,52,0.05);
+  --gold-border: rgba(164,16,52,0.15);
+
+  --success: #2D8B5F;
+  --warning: #B8860B;
+  --danger: #C0392B;
+  --info: #2E6B9E;
+
+  --chart-1: #A41034;
+  --chart-2: #2E6B9E;
+  --chart-3: #2D8B5F;
+  --chart-4: #1A1A1A;
+  --chart-5: #8C8C8C;
+
+  --radius: 0.625rem;
+
+  --sidebar: #FAFAF5;
+  --sidebar-foreground: #1A1A1A;
+  --sidebar-primary: #A41034;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: rgba(164,16,52,0.05);
+  --sidebar-accent-foreground: #1A1A1A;
+  --sidebar-border: rgba(0,0,0,0.07);
+  --sidebar-ring: #A41034;
+}
+
+.dark {
+  --background: #0E1117;
+  --background-alt: #161A22;
+  --foreground: #E8E6E1;
+  --card: #1C2029;
+  --card-foreground: #E8E6E1;
+  --popover: #1C2029;
+  --popover-foreground: #E8E6E1;
+  --primary: #D44060;
+  --primary-foreground: #FFFFFF;
+  --secondary: #1C2029;
+  --secondary-foreground: #E8E6E1;
+  --muted: #1C2029;
+  --muted-foreground: #9CA3AF;
+  --accent: rgba(212,64,96,0.12);
+  --accent-foreground: #E8E6E1;
+  --destructive: #E74C3C;
+  --border: rgba(255,255,255,0.08);
+  --input: rgba(255,255,255,0.08);
+  --ring: #D44060;
+
+  --navy: #E8E6E1;
+  --navy-light: #C9C7C2;
+  --navy-soft: #9CA3AF;
+  --gold: #D44060;
+  --gold-light: #E05575;
+  --gold-pale: rgba(212,64,96,0.15);
+  --gold-bg: rgba(212,64,96,0.08);
+  --gold-border: rgba(212,64,96,0.2);
+
+  --success: #3DA874;
+  --warning: #D4A017;
+  --danger: #E74C3C;
+  --info: #4A9FD4;
+
+  --chart-1: #D44060;
+  --chart-2: #4A9FD4;
+  --chart-3: #3DA874;
+  --chart-4: #E8E6E1;
+  --chart-5: #9CA3AF;
+
+  --sidebar: #0E1117;
+  --sidebar-foreground: #E8E6E1;
+  --sidebar-primary: #D44060;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: rgba(212,64,96,0.08);
+  --sidebar-accent-foreground: #E8E6E1;
+  --sidebar-border: rgba(255,255,255,0.08);
+  --sidebar-ring: #D44060;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* Animations */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease forwards;
+}
+
+.animate-delay-1 { animation-delay: 0.1s; }
+.animate-delay-2 { animation-delay: 0.2s; }
+.animate-delay-3 { animation-delay: 0.3s; }
+.animate-delay-4 { animation-delay: 0.4s; }
+.animate-delay-5 { animation-delay: 0.5s; }
+.animate-delay-6 { animation-delay: 0.6s; }
+
+/* Noise texture overlay — adds grain to flat backgrounds */
+.noise-bg::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.dark .noise-bg::before {
+  opacity: 0.03;
+}
+
+/* Gradient divider — replaces flat hr/border-t */
+.gradient-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0,0,0,0.08) 20%,
+    rgba(0,0,0,0.08) 80%,
+    transparent
+  );
+}
+
+.dark .gradient-divider {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,0.06) 20%,
+    rgba(255,255,255,0.06) 80%,
+    transparent
+  );
+}
+
+/* Crimson gradient text utility */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #A41034 0%, #C41842 50%, #A41034 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Premium card hover glow */
+.card-hover-glow {
+  transition: all 0.3s ease;
+}
+.card-hover-glow:hover {
+  box-shadow: 0 0 0 1px rgba(164,16,52,0.08), 0 8px 30px rgba(0,0,0,0.04);
+}
+.dark .card-hover-glow:hover {
+  box-shadow: 0 0 0 1px rgba(212,64,96,0.1), 0 8px 30px rgba(0,0,0,0.2);
+}
+
+/* Section fade mask — for pattern backgrounds */
+.mask-fade-center {
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+}
+
+.mask-fade-bottom {
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+/* Ambient floating animation for gradient orbs */
+@keyframes ambientFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(10px, -15px) scale(1.02); }
+  50% { transform: translate(-5px, 10px) scale(0.98); }
+  75% { transform: translate(15px, 5px) scale(1.01); }
+}
+
+/* Live pulse for feed indicators */
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* Scroll indicator bounce */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.animate-scroll-bounce {
+  animation: scrollBounce 2s ease-in-out infinite;
+}
